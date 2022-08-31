@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "example": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 3000",
+      "environmentVariables": {
+        "FUNCTION_TARGET": "PipServices3.Gcp.Containers.Function"
+      }
+    }
+  }
+}
