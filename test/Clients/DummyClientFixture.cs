@@ -35,7 +35,7 @@ namespace PipServices3.Gcp.Clients
                 process.Start();
 
                 // check process status
-                Thread.Sleep(2000);
+                Thread.Sleep(3000);
 
                 if (process.HasExited)
                     throw new Exception("Cloud function server starts failed: " + process.StandardError.ReadToEnd());
