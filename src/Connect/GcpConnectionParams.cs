@@ -2,6 +2,7 @@
 using PipServices3.Commons.Data;
 using PipServices3.Commons.Errors;
 using PipServices3.Components.Auth;
+using PipServices3.Components.Connect;
 using System.Collections.Generic;
 
 namespace PipServices3.Gcp.Connect
@@ -193,7 +194,7 @@ namespace PipServices3.Gcp.Connect
             foreach (var credential in credentials)
                 result.Append(credential);
 
-            var connections = CredentialParams.ManyFromConfig(config);
+            var connections = ConnectionParams.ManyFromConfig(config);
             foreach (var connection in connections)
                 result.Append(connection);
 
