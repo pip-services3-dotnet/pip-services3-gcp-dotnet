@@ -18,7 +18,7 @@ namespace PipServices3.Gcp.Services
         {
             if (_service == null)
             {
-                _service = new DummyCommandableCloudFunction();
+                _service = new DummyCloudFunction();
                 _service.Configure(_config);
                 await _service.OpenAsync(null);
             }

@@ -248,7 +248,6 @@ namespace PipServices3.Gcp.Containers
         /// <param name="schema">a validation schema to validate received parameters.</param>
         /// <param name="action">an action function that is called when action is invoked.</param>
         /// <exception cref="UnknownException"></exception>
-        [Obsolete("This method has been deprecated. Use CloudFunctionService instead", false)]
         protected void RegisterAction(string cmd, Schema schema, Func<HttpContext, Task> action)
         {
             if (string.IsNullOrEmpty(cmd))

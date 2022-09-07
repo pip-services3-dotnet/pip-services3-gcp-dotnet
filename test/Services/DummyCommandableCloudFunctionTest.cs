@@ -21,7 +21,7 @@ namespace PipServices3.Gcp.Services
 
         public void Dispose()
         {
-            GC.SuppressFinalize(this);
+            fixture.Dispose();
         }
     }
 }

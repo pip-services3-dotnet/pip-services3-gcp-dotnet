@@ -34,7 +34,10 @@ namespace PipServices3.Gcp.Clients
     ///     - region:        is the region where your function is deployed
     ///     - function:      is the name of the HTTP function you deployed
     ///     - org_id:        organization name
-    ///
+    /// - options:
+	///     - retries:               number of retries(default: 3)
+	///     - connect_timeout:       connection timeout in milliseconds(default: 10 sec)
+	///     - timeout:               invocation timeout in milliseconds(default: 10 sec)
     /// - credentials:   
     ///     - account: the service account name
     ///     - auth_token:    Google-generated ID token or null if using custom auth(IAM)
@@ -83,6 +86,12 @@ namespace PipServices3.Gcp.Clients
     /// </example>
     public abstract class CloudFunctionClient : IOpenable, IConfigurable, IReferenceable
     {
+        private static readonly ConfigParams _defaultConfig = ConfigParams.FromTuples(
+            "options.connect_timeout", 60000,
+            "options.retries", 3,
+            "options.timeout", 10000
+        );
+
         /// <summary>
         /// The HTTP client.
         /// </summary>
@@ -150,6 +159,8 @@ namespace PipServices3.Gcp.Clients
             this._dependencyResolver.Configure(config);
 
             this._connectTimeout = config.GetAsIntegerWithDefault("options.connect_timeout", this._connectTimeout);
+            this._timeout = config.GetAsIntegerWithDefault("options.timeout", this._timeout);
+            this._retries = config.GetAsIntegerWithDefault("options.retries", this._retries);
         }
 
         /// <summary>
@@ -229,7 +240,7 @@ namespace PipServices3.Gcp.Clients
                     UseCookies = true
                 });
 
-                _client.Timeout = TimeSpan.FromMilliseconds(_timeout);
+                _client.Timeout = TimeSpan.FromMilliseconds(_timeout + _connectTimeout);
                 _client.DefaultRequestHeaders.ConnectionClose = true;
 
                 _logger.Debug(correlationId, "Google function client connected to %s", this._connection.Uri);
@@ -302,7 +313,7 @@ namespace PipServices3.Gcp.Clients
 
             HttpResponseMessage result = null;
 
-            var retries = Math.Min(1, Math.Max(5, _retries));
+            var retries = _retries;
 
             // args to request entity
             using (var requestContent = CreateEntityContent(args))
