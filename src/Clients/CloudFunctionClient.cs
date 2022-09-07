@@ -86,12 +86,6 @@ namespace PipServices3.Gcp.Clients
     /// </example>
     public abstract class CloudFunctionClient : IOpenable, IConfigurable, IReferenceable
     {
-        private static readonly ConfigParams _defaultConfig = ConfigParams.FromTuples(
-            "options.connect_timeout", 60000,
-            "options.retries", 3,
-            "options.timeout", 10000
-        );
-
         /// <summary>
         /// The HTTP client.
         /// </summary>
@@ -102,7 +96,7 @@ namespace PipServices3.Gcp.Clients
         /// </summary>
         protected GcpConnectionParams _connection;
 
-        protected int _retries = 1;
+        protected int _retries = 3;
 
         /// <summary>
         /// The default headers to be added to every request.
