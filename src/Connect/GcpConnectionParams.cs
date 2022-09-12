@@ -151,7 +151,7 @@ namespace PipServices3.Gcp.Connect
             string region = Region;
             string projectId = ProjectId;
 
-            if (uri == null && (projectId == null && region == null && functionName == null && protocol == null))
+            if (uri == null && (projectId == null || region == null || functionName == null || protocol == null))
             {
                 throw new ConfigException(
                     correlationId,
