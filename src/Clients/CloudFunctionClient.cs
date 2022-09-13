@@ -287,7 +287,7 @@ namespace PipServices3.Gcp.Clients
         protected async Task<T> InvokeAsync<T>(string cmd, string correlationId, object args)
         {
             if (string.IsNullOrEmpty(cmd))
-                throw new UnknownException(null, "NO_COMMAND", "Missing Seneca pattern cmd");
+                throw new UnknownException(null, "NO_COMMAND", "Missing command: " + cmd);
 
             // TODO: optimize this conversion
             args = JsonConverter.ToMap(JsonConverter.ToJson(args));

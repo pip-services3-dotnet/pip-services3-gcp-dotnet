@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
   0: "_acefgimoprsuv",
-  1: "cgi",
+  1: "cgim",
   2: "p",
   3: "cefgimorsv",
   4: "_",

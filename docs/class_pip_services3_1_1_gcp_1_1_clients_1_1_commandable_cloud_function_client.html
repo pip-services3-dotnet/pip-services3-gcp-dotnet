@@ -137,7 +137,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a2fb9767a4aa24011421d236733c17cd0 inherit pro_attribs_class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Google Function connection parameters  <a href="class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client.html#a2fb9767a4aa24011421d236733c17cd0">More...</a><br /></td></tr>
 <tr class="separator:a2fb9767a4aa24011421d236733c17cd0 inherit pro_attribs_class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad9969ee6e10de99f530978db2dd28fd inherit pro_attribs_class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client"><td class="memItemLeft" align="right" valign="top"><a id="aad9969ee6e10de99f530978db2dd28fd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>_retries</b> = 1</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_retries</b> = 3</td></tr>
 <tr class="separator:aad9969ee6e10de99f530978db2dd28fd inherit pro_attribs_class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a762d8dd0b3092ebf1d077cecc6f940ad inherit pro_attribs_class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client.html#a762d8dd0b3092ebf1d077cecc6f940ad">_headers</a> = new()</td></tr>
 <tr class="memdesc:a762d8dd0b3092ebf1d077cecc6f940ad inherit pro_attribs_class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default headers to be added to every request.  <a href="class_pip_services3_1_1_gcp_1_1_clients_1_1_cloud_function_client.html#a762d8dd0b3092ebf1d077cecc6f940ad">More...</a><br /></td></tr>
@@ -178,6 +178,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_retries</b> = 1</td><
 <li>region: is the region where your function is deployed</li>
 <li>function: is the name of the HTTP function you deployed</li>
 <li>org_id: organization name</li>
+</ul>
+</li>
+<li>options:<ul>
+<li>retries: number of retries(default: 3)</li>
+<li>connect_timeout: connection timeout in milliseconds(default: 10 sec)</li>
+<li>timeout: invocation timeout in milliseconds(default: 10 sec)</li>
 </ul>
 </li>
 <li>credentials:<ul>

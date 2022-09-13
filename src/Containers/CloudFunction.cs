@@ -298,7 +298,7 @@ namespace PipServices3.Gcp.Containers
         /// </summary>
         /// <param name="context">Google Function request</param>
         /// <returns>Returns command from request</returns>
-        protected async Task<string> GetCommand(HttpContext context)
+        protected async Task<string> GetCommandAsync(HttpContext context)
         {
             return await CloudFunctionRequestHelper.GetCommand(context);
         }
@@ -313,7 +313,7 @@ namespace PipServices3.Gcp.Containers
         /// <exception cref="BadRequestException"></exception>
         protected async Task ExecuteAsync(HttpContext context)
         {
-            string cmd = await GetCommand(context);
+            string cmd = await GetCommandAsync(context);
             string correlationId = GetCorrelationId(context);
 
             if (string.IsNullOrEmpty(cmd))

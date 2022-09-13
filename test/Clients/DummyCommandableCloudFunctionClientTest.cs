@@ -1,5 +1,6 @@
 ﻿using PipServices3.Commons.Config;
 using PipServices3.Gcp.Services;
+using PipServices3.Rpc.Clients;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -9,7 +10,7 @@ namespace PipServices3.Gcp.Clients
     [Collection("Sequential")]
     public class DummyCommandableCloudFunctionClientTest : IDisposable
     {
-        protected DummyCloudFunctionClient client;
+        protected DummyCommandableCloudFunctionClient client;
         protected DummyClientFixture fixture;
         public DummyCommandableCloudFunctionClientTest()
         {
@@ -30,7 +31,7 @@ namespace PipServices3.Gcp.Clients
                 "connection.project_id", projectId
             );
 
-            client = new DummyCloudFunctionClient();
+            client = new DummyCommandableCloudFunctionClient();
             client.Configure(config);
 
             fixture = new DummyClientFixture(typeof(Function), client);

@@ -34,16 +34,57 @@ namespace PipServices3.Gcp.Services
     /// <example>
     /// <code>
     /// 
+    /// public class MyCloudFunctionService : CloudFunctionService
+    /// {
+    ///     private IMyController _controller;
     /// 
+    ///     public MyCloudFunctionService(IMyController controller) : base("v1.myservice")
+    ///     {
+    ///         _controller = controller;
     /// 
+    ///         this._dependencyResolver.Put("controller", new Descriptor("mygroup", "controller", "*", "*", "1.0"));
+    ///     }
     /// 
+    ///     public override void SetReferences(IReferences references)
+    ///     {
+    ///         base.SetReferences(references);
+    ///         _controller = _dependencyResolver.GetRequired<IMyController>("controller");
+    ///     }
     /// 
+    ///     public static void m()
+    ///     {
+    ///         var service = new MyCloudFunctionService(controller);
+    ///         service.Configure(ConfigParams.FromTuples(
+    ///             "connection.protocol", "http",
+    ///         "connection.host", "localhost",
+    ///             "connection.port", 8080
+    ///         ));
+    ///         service.SetReferences(References.FromTuples(
+    ///            new Descriptor("mygroup", "controller", "default", "default", "1.0"), controller
+    ///         ));
     /// 
+    ///         await service.OpenAsync("123");
+    ///     }
     /// 
-    /// 
-    /// 
-    /// 
-    /// 
+    ///     protected override void Register()
+    ///     {
+    ///         RegisterAction("get_dummies", new ObjectSchema()
+    ///             .WithOptionalProperty("body",
+    ///                 new ObjectSchema()
+    ///                     .WithOptionalProperty("filter", new FilterParamsSchema())
+    ///                     .WithOptionalProperty("paging", new PagingParamsSchema())
+    ///                     .WithRequiredProperty("cmd", TypeCode.String)
+    ///             ),
+    ///             async (req) =>
+    ///             {
+    ///                 var correlationId = GetCorrelationId(req);
+    ///                 var body = await CloudFunctionRequestHelper.GetBodyAsync(req);
+    ///                 var id = body.GetAsString("id");
+    ///                 return await this._controller.getMyData(correlationId, id);
+    ///             }
+    ///         );
+    ///     }
+    /// }
     /// 
     /// 
     /// 
@@ -261,7 +302,29 @@ namespace PipServices3.Gcp.Services
             this._actions.Add(registeredAction);
         }
 
-        // TODO registerActionWithAuth
+        protected void RegisterActionWithAuth(string name, Schema schema,
+            Func<HttpContext, Func<HttpContext, Task>, Task> authorize,
+            Func<HttpContext, Task> action)
+        {
+            var actionWrapper = this.ApplyValidation(schema, action);
+
+            // Add authorization just before validation
+            actionWrapper = (req) =>
+            {
+                return authorize(req, actionWrapper);
+            };
+            actionWrapper = this.ApplyInterceptors(actionWrapper);
+
+            var self = this;
+            var registeredAction = new CloudFunctionAction()
+            {
+                Cmd = GenerateActionCmd(name),
+                Schema = schema,
+                Action = async (req) => { await actionWrapper(req); }
+            };
+
+            _actions.Add(registeredAction);
+        }
 
         /// <summary>
         /// Registers a middleware for actions in Google Function service.
