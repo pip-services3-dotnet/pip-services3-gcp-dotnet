@@ -362,7 +362,7 @@ namespace PipServices3.Gcp.Services
         /// <returns>returns command from request</returns>
         protected async Task<string> GetCommand(HttpContext context)
         {
-            return await CloudFunctionRequestHelper.GetCommand(context);
+            return await CloudFunctionRequestHelper.GetCommandAsync(context);
         }
     }
 }

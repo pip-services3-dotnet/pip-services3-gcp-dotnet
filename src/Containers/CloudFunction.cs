@@ -300,7 +300,7 @@ namespace PipServices3.Gcp.Containers
         /// <returns>Returns command from request</returns>
         protected async Task<string> GetCommandAsync(HttpContext context)
         {
-            return await CloudFunctionRequestHelper.GetCommand(context);
+            return await CloudFunctionRequestHelper.GetCommandAsync(context);
         }
 
         /// <summary>

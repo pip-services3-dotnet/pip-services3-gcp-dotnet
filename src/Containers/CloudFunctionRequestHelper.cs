@@ -39,7 +39,7 @@ namespace PipServices3.Gcp.Containers
         /// </summary>
         /// <param name="context">the Google Function context</param>
         /// <returns>returns command from context</returns>
-        public static async Task<string> GetCommand(HttpContext context)
+        public static async Task<string> GetCommandAsync(HttpContext context)
         {
             string cmd = context.Request.Query.TryGetValue("cmd", out StringValues command)
                 ? command.ToString()
