@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -318,22 +319,28 @@ namespace PipServices3.Gcp.Containers
 
             if (string.IsNullOrEmpty(cmd))
             {
-                throw new BadRequestException(
+                var err = new BadRequestException(
                     correlationId,
                     "NO_COMMAND",
                     "Cmd parameter is missing"
                 );
+                await HttpResponseSender.SendErrorAsync(context.Response, err);
+                return;
             }
 
-            var action = this._actions[cmd];
+            Func<HttpContext, Task> action; 
+
+            _actions.TryGetValue(cmd, out action);
+
             if (action == null)
             {
-                throw new BadRequestException(
-                    correlationId,
-                    "NO_ACTION",
-                    "Action " + cmd + " was not found"
-                )
-                .WithDetails("command", cmd);
+                var err = new BadRequestException(
+                        correlationId,
+                        "NO_ACTION",
+                        "Action " + cmd + " was not found"
+                    ).WithDetails("command", cmd);
+                await HttpResponseSender.SendErrorAsync(context.Response, err);
+                return;
             }
 
             await action(context);
