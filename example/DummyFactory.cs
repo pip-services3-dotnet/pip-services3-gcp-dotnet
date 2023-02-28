@@ -8,8 +8,8 @@ namespace PipServices3.Gcp
     {
         public static readonly Descriptor Descriptor = new Descriptor("pip-services-dummies", "factory", "default", "default", "1.0");
         public static readonly Descriptor ControllerDescriptor = new Descriptor("pip-services-dummies", "controller", "default", "*", "1.0");
-        public static readonly Descriptor CloudFunctionServiceDescriptor = new Descriptor("pip-services-dummies", "service", "gcp-function", "*", "1.0");
-        public static readonly Descriptor CmdCloudFunctionServiceDescriptor = new Descriptor("pip-services-dummies", "service", "commandable-gcp-function", "*", "1.0");
+        public static readonly Descriptor CloudFunctionServiceDescriptor = new Descriptor("pip-services-dummies", "service", "cloudfunc", "*", "1.0");
+        public static readonly Descriptor CmdCloudFunctionServiceDescriptor = new Descriptor("pip-services-dummies", "service", "commandable-cloudfunc", "*", "1.0");
     
         public DummyFactory(): base()
         {

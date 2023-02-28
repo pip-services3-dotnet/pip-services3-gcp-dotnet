@@ -25,8 +25,8 @@ namespace PipServices3.Gcp.Containers
     /// ### References ###
     ///     - *:logger:*:*:1.0                              (optional) <see cref="ILogger"/> components to pass log messages
     ///     - *:counters:*:*:1.0                            (optional) <see cref="ICounters"/> components to pass collected measurements
-    ///     - *:service:gcp-function:*:1.0                  (optional) <see cref="CloudFunctionService"/> services to handle action requests
-    ///     - *:service:commandable-gcp-function:*:1.0      (optional) <see cref="CloudFunctionService"/> services to handle action requests
+    ///     - *:service:cloudfunc:*:1.0                  (optional) <see cref="CloudFunctionService"/> services to handle action requests
+    ///     - *:service:commandable-cloudfunc:*:1.0      (optional) <see cref="CloudFunctionService"/> services to handle action requests
     /// 
     /// </summary>
     /// 

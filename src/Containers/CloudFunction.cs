@@ -31,8 +31,8 @@ namespace PipServices3.Gcp.Containers
     /// ### References ###
     ///     - *:logger:*:*:1.0                              (optional) <see cref="ILogger"/> components to pass log messages
     ///     - *:counters:*:*:1.0                            (optional) <see cref="ICounters"/> components to pass collected measurements
-    ///     - *:service:gcp-function:*:1.0                  (optional) <see cref="ICloudFunctionService"/> services to handle action requests
-    ///     - *:service:commandable-gcp-function:*:1.0      (optional) <see cref="ICloudFunctionService"/> services to handle action requests
+    ///     - *:service:cloudfunc:*:1.0                  (optional) <see cref="ICloudFunctionService"/> services to handle action requests
+    ///     - *:service:commandable-cloudfunc:*:1.0      (optional) <see cref="ICloudFunctionService"/> services to handle action requests
     /// </summary>
     /// 
     /// <example>
@@ -220,10 +220,10 @@ namespace PipServices3.Gcp.Containers
         {
             // Extract regular and commandable Google Function services from references
             var services = this._references.GetOptional<ICloudFunctionService>(
-                new Descriptor("*", "service", "gcp-function", "*", "*")
+                new Descriptor("*", "service", "cloudfunc", "*", "*")
             );
             var cmdServices = this._references.GetOptional<ICloudFunctionService>(
-                new Descriptor("*", "service", "commandable-gcp-function", "*", "*")
+                new Descriptor("*", "service", "commandable-cloudfunc", "*", "*")
             );
 
             services.AddRange(cmdServices);

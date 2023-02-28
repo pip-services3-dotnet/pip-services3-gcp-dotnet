@@ -183,8 +183,8 @@ readonly ManualResetEvent&#160;</td><td class="memItemRight" valign="bottom"><b>
 <ul>
 <li>*:logger:*:*:1.0 (optional) ILogger components to pass log messages</li>
 <li>*:counters:*:*:1.0 (optional) ICounters components to pass collected measurements</li>
-<li>*:service:gcp-function:*:1.0 (optional) ICloudFunctionService services to handle action requests</li>
-<li>*:service:commandable-gcp-function:*:1.0 (optional) ICloudFunctionService services to handle action requests </li>
+<li>*:service:cloudfunc:*:1.0 (optional) ICloudFunctionService services to handle action requests</li>
+<li>*:service:commandable-cloudfunc:*:1.0 (optional) ICloudFunctionService services to handle action requests </li>
 </ul>
 <div class="fragment"><div class="line"><span class="keyword">class </span>MyCloudFunction : CloudFunction</div><div class="line">{</div><div class="line">    <span class="keyword">public</span> MyCloudFunction() : base(<span class="stringliteral">&quot;mygroup&quot;</span>, <span class="stringliteral">&quot;MyGroup Google Function&quot;</span>)</div><div class="line">    {</div><div class="line"></div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">var cloudFunction = <span class="keyword">new</span> MyCloudFunction();</div><div class="line"></div><div class="line">await cloudFunction.RunAsync();</div><div class="line">Console.WriteLine(<span class="stringliteral">&quot;MyCloudFunction is started&quot;</span>);</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4d14cc69efb229b51819c311ee45ed92"></a>

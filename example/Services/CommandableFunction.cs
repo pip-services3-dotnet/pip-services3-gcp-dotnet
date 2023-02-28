@@ -11,7 +11,7 @@ namespace PipServices3.Gcp.Services
         private static CloudFunction _service;
         private ConfigParams _config = ConfigParams.FromTuples(
             "logger.descriptor", "pip-services:logger:console:default:1.0",
-            "service.descriptor", "pip-services-dummies:service:commandable-gcp-function:default:1.0"
+            "service.descriptor", "pip-services-dummies:service:commandable-cloudfunc:default:1.0"
         );
 
         public async Task HandleAsync(HttpContext context)
